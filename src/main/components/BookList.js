@@ -3,15 +3,27 @@ import BookShelf from './BookShelf'
 
 function BookList(props) {
   const shelves = [
-    { id: '0', name: 'Currently Reading' },
-    { id: '1', name: ' Want to Read' },
-    { id: '2', name: ' Read' }
+    { id: 'currentlyReading', name: 'Currently Reading' },
+    { id: 'wantToRead', name: ' Want to Read' },
+    { id: 'read', name: ' Read' }
   ]
+
+  let getBookFromShelf = shelf => {
+    return props.books.filter(book => {
+      return book.shelf === shelf
+    })
+  }
+
   return (
     <div className="list-books-content">
       <div className="container">
         {shelves.map(shelf => (
-          <BookShelf key={shelf.id} title={shelf.name} books={props.books} />
+          <BookShelf
+            key={shelf.id}
+            title={shelf.name}
+            books={getBookFromShelf(shelf.id)}
+            onShelfChange={props.onShelfChange}
+          />
         ))}
       </div>
     </div>

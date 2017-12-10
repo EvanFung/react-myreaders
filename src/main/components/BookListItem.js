@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ function BookListItem(props) {
             <span className="no-image" />
           </div>
         )}
-        <BookShelfSelector book={book} />
+        <BookShelfSelector book={book} onShelfChange={props.onShelfChange} />
       </div>
       <div className="book-title">{book.title}</div>
       <div className="book-authors">{getAuthorsString()}</div>

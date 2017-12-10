@@ -17,6 +17,32 @@ class BooksApp extends React.Component {
     books: []
   }
 
+  updateBookStatus = book => {
+    const books = this.state.books
+    const bookIndex = books.findIndex(item => item.id === book.id)
+
+    if (bookIndex !== -1) {
+      if (book.shelf === 'none') {
+        console.log(`"${book.title}" removed from shelves`)
+        books.splice(bookIndex, 1)
+      } else {
+        console.log(`"${book.title}" moved to shelf "${book.shelf}"`)
+        books[bookIndex] = book
+      }
+    } else {
+      console.log(`"${book.title}" added to shelf "${book.shelf}"`)
+      books.push(book)
+    }
+    this.setState({ books })
+  }
+
+  updateBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.updateBookStatus(book)
+    })
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       // console.log(books)
@@ -37,7 +63,12 @@ class BooksApp extends React.Component {
             <Route
               path="/"
               exact
-              render={() => <BookList books={this.state.books} />}
+              render={() => (
+                <BookList
+                  books={this.state.books}
+                  onShelfChange={this.updateBookShelf}
+                />
+              )}
             />
             <Route path="/search/" render={match => <BookSearch />} />
           </main>
