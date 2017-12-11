@@ -1,37 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import * as BooksAPI from '../utils/BooksAPI';
-import BookListItem from './BookListItem';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import * as BooksAPI from '../utils/BooksAPI'
+import BookListItem from './BookListItem'
 class BookSearch extends Component {
   static propTypes = {
     onShelfChange: PropTypes.func.isRequired,
     getBookShelf: PropTypes.func.isRequired
-  };
+  }
   state = {
     query: '',
     results: []
-  };
+  }
 
   updateQuery = query => {
-    let trimedQuery = query.trim();
-    this.setState({ query: trimedQuery });
-    if (query !== '') this.handleBookSearch(trimedQuery);
-  };
+    this.setState({ query: query })
+    BooksAPI.isValidQueryStr(query.trim())
+      ? this.handleBookSearch(query.trim())
+      : this.setState({ results: [] })
+  }
 
   handleBookSearch = query => {
     BooksAPI.search(query, 20).then(results => {
-      let bookOnShelves = results.map(book => {
-        book.shelf = this.props.getBookShelf(book.id);
-        return book;
-      });
-      this.setState({ results: bookOnShelves });
-    });
-  };
+      if (results !== undefined && results.length > 0) {
+        let bookOnShelves = results.map(book => {
+          book.shelf = this.props.getBookShelf(book.id)
+          return book
+        })
+        this.setState({ results: bookOnShelves })
+      }
+    })
+  }
 
   render() {
-    const { query, results } = this.state;
-    const { onShelfChange } = this.props;
+    const { query, results } = this.state
+    const { onShelfChange } = this.props
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -44,7 +47,7 @@ class BookSearch extends Component {
               placeholder="Search by title or author"
               value={query}
               onChange={event => {
-                this.updateQuery(event.target.value);
+                this.updateQuery(event.target.value)
               }}
             />
           </div>
@@ -77,8 +80,8 @@ class BookSearch extends Component {
           </ol>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default BookSearch;
+export default BookSearch

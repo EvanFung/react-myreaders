@@ -1,19 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import BookShelf from './BookShelf';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import BookShelf from './BookShelf'
 
 function BookList(props) {
   const shelves = [
     { id: 'currentlyReading', name: 'Currently Reading' },
     { id: 'wantToRead', name: 'Want to Read' },
     { id: 'read', name: 'Read' }
-  ];
+  ]
 
   let getBookFromShelf = shelf => {
     return props.books.filter(book => {
-      return book.shelf === shelf;
-    });
-  };
+      return book.shelf === shelf
+    })
+  }
 
   return (
     <div className="list-books-content">
@@ -31,7 +31,7 @@ function BookList(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default BookList;
+export default BookList
