@@ -1,6 +1,6 @@
 import React from 'react'
 import BookListItem from './BookListItem'
-
+import PropTypes from 'prop-types'
 function BookShelf(props) {
   const books = props.books
   return (
@@ -22,5 +22,9 @@ function BookShelf(props) {
     </div>
   )
 }
-
+BookShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  onShelfChange: PropTypes.func.isRequired
+}
 export default BookShelf

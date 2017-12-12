@@ -1,7 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-// import { Link } from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 import BookShelfSelector from './BookShelfSelector'
 
 function BookListItem(props) {
@@ -35,5 +33,9 @@ function BookListItem(props) {
       <div className="book-authors">{getAuthorsString()}</div>
     </div>
   )
+}
+BookListItem.propTypes = {
+  book: PropTypes.object.isRequired,
+  onShelfChange: PropTypes.func.isRequired
 }
 export default BookListItem

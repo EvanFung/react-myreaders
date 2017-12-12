@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-
+import PropTypes from 'prop-types'
 function BookList(props) {
   const shelves = [
     { id: 'currentlyReading', name: 'Currently Reading' },
@@ -32,6 +32,11 @@ function BookList(props) {
       </div>
     </div>
   )
+}
+
+BookList.propTypes = {
+  books: PropTypes.array.isRequired,
+  onShelfChange: PropTypes.func.isRequired
 }
 
 export default BookList
