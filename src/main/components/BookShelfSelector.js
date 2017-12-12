@@ -1,6 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+/**
+ * @module components/BookShelfSelector
+ * @author EvanFung <evanfungv@gmail.com>
+ * @version     1.0
+ * @param       {[object]} props [Component props]
+ * @param       {[array]} props.books [List of books to display on different shelf]
+ * @param       {[function]} props.onShelfChange [Handler function to trigger when a book is moved to another shelf]
+ */
 function BookShelfSelector(props) {
   const book = props.book
 
@@ -11,7 +18,7 @@ function BookShelfSelector(props) {
   return (
     <div className="book-shelf-changer">
       <select value={book.shelf || 'none'} onChange={changeBookShelf}>
-        <option value="none" disabled>
+        <option value="moveTo" disabled>
           Move to...
         </option>
         <option value="currentlyReading">Currently Reading</option>

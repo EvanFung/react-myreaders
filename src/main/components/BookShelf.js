@@ -1,6 +1,14 @@
 import React from 'react'
 import BookListItem from './BookListItem'
 import PropTypes from 'prop-types'
+/**
+ * @module components/BookShelf
+ * @author EvanFung <evanfungv@gmail.com>
+ * @version     1.0
+ * @param       {[object]} props [Component props]
+ * @param       {[array]} props.books [List of books to display on different shelf]
+ * @param       {[function]} props.onShelfChange [Handler function to trigger when a book is moved to another shelf]
+ */
 function BookShelf(props) {
   const books = props.books
   return (
